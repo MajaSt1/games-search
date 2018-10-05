@@ -1,4 +1,4 @@
-package com.search.gamessearch.dao;
+package com.search.gamessearch.db;
 
 import com.search.gamessearch.model.Genre;
 import com.search.gamessearch.model.VideoGame;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class VideoGameDaoTestSuite {
+public class VideoGameDbTestSuite {
     @Autowired
     VideoGameRepository gamesRepository;
 
