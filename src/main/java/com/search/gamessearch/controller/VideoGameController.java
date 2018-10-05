@@ -2,12 +2,9 @@ package com.search.gamessearch.controller;
 
 import com.search.gamessearch.model.Genre;
 import com.search.gamessearch.model.VideoGame;
-import com.search.gamessearch.model.VideoGameDto;
-import com.search.gamessearch.mapper.GamesMapper;
 import com.search.gamessearch.repository.GenreRepository;
 import com.search.gamessearch.repository.VideoGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +23,6 @@ public class VideoGameController {
     VideoGameRepository gameRepository;
     @Autowired
     GenreRepository genreRepository;
-    @Autowired
-    GamesMapper gamesMapper;
 /** MVC
  * */
     @RequestMapping("/login")
