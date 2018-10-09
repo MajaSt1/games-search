@@ -11,15 +11,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * przekierowywanie żadania do pozostałych komponentów
  */
 @SpringBootApplication
-public class GamesSearchApplication extends SpringBootServletInitializer//implements CommandLineRunner
+public class GamesSearchApplication //extends SpringBootServletInitializer//implements CommandLineRunner
 {
 
-    /*  @Autowired
-      VideoGameDao videoGameRepository;
-
-      @Autowired
-      GenreDao genreRepository;
-  */
     public static void main(String[] args) {
         SpringApplication.run(GamesSearchApplication.class, args);
     }
@@ -28,9 +22,9 @@ public class GamesSearchApplication extends SpringBootServletInitializer//implem
     public void run(String... arg0) throws Exception {
     } */
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
-        return application.sources(GamesSearchApplication.class);
-    }
+ //   @Override
+  //  protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
+   //     return application.sources(GamesSearchApplication.class);
+   // }
 }
 

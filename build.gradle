@@ -25,27 +25,28 @@ repositories {
 
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-
-    compile('org.springframework.boot:spring-boot-starter-domain-jpa')
-    compile ('mysql:mysql-connector-java')
-
-    compileOnly 'org.projectlombok:lombok:1.18.0'
+    //Spring
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.3.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '3.1.0.RELEASE'
     compile("org.springframework.boot:spring-boot-starter-security")
-
-    compile('com.jayway.jsonpath:json-path:2.0.0')
-    compile('net.minidev:json-smart:2.1.1')
-    compile('net.minidev:asm:1.0.2')
-    compile group: 'org.json', name: 'json', version: '20090211'
-
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     testCompile("org.springframework.security:spring-security-test")
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    //Thymeleaf
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.9.RELEASE'
+    compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '1.2'
+    //MySQL
+    compile ('mysql:mysql-connector-java')
+
+    compileOnly 'org.projectlombok:lombok:1.18.0'
+
+    compile('com.jayway.jsonpath:json-path:2.0.0')
+    compile group: 'org.json', name: 'json', version: '20090211'
 
     // outside Tomcat
      providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 }

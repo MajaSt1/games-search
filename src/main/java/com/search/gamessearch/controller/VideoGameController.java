@@ -3,8 +3,9 @@ package com.search.gamessearch.controller;
 import com.search.gamessearch.model.Genre;
 import com.search.gamessearch.model.VideoGame;
 import com.search.gamessearch.repository.GenreRepository;
-import com.search.gamessearch.repository.VideoGameRepository;
+import com.search.gamessearch.service.VideoGamesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +16,14 @@ import java.util.Optional;
  * */
 
 @CrossOrigin(origins = "*")
-@RestController
+@Controller
 @RequestMapping("/videoGame")
 public class VideoGameController {
 
     @Autowired
-    VideoGameRepository gameRepository;
-    @Autowired
     GenreRepository genreRepository;
+    @Autowired
+    VideoGamesService videoGamesService;
 /** MVC
  * */
     @RequestMapping("/login")
@@ -32,31 +33,31 @@ public class VideoGameController {
 
     @RequestMapping("/games")
     public String index(Model model) {
-        List<VideoGame> vgames = (List<VideoGame>) gameRepository.findAll();
+        List<VideoGame> vgames = videoGamesService.findAll();
         model.addAttribute("videoGames", vgames);
         return "videoGames";
     }
-    @RequestMapping(value = "add")
+    @RequestMapping(value = "/newGame")
     public String addGame(Model model){
-        model.addAttribute("videoGames", new VideoGame());
+        model.addAttribute("addVideoGame", new VideoGame());
         return "addGame";
     }
 
     @RequestMapping(value = "/edit/{id}")
     public String editGame(@PathVariable("id") Long videoGameId, Model model){
-        model.addAttribute("student", gameRepository.findById(videoGameId));
+        model.addAttribute("game", videoGamesService.findOne(videoGameId));
         return "editGame";
     }
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(VideoGame videoGame){
-        gameRepository.save(videoGame);
+        videoGamesService.save(videoGame);
         return "redirect:/videoGames";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteGame(@PathVariable("id") Long videoGameId, Model model) {
-        gameRepository.deleteById(videoGameId);
+    public String deleteGame(@PathVariable("id") Long videoGameId) {
+        videoGamesService.delete(videoGameId);
         return "redirect:/videoGames";
     }
 
@@ -64,28 +65,39 @@ public class VideoGameController {
     public String addGenre(@PathVariable("id") Long videoGameId, Model model){
 
         model.addAttribute("genre", genreRepository.findAll());
-        model.addAttribute("game", gameRepository.findById(videoGameId).get());
+        model.addAttribute("game", videoGamesService.findOne(videoGameId).get());
         return "addGameGenre";
     }
 
-    @RequestMapping(value="/student/{id}/courses", method=RequestMethod.GET)
+    @RequestMapping(value="/games/{id}/genres", method=RequestMethod.GET)
     public String gamesAddGenre(@RequestParam(value="action", required=true) String action, @PathVariable Long id, @RequestParam Long genreId, Model model) {
         Optional<Genre> genre = genreRepository.findById(genreId);
-        Optional<VideoGame> game = gameRepository.findById(id);
+        Optional<VideoGame> game = videoGamesService.findOne(id);
 
         if (game.isPresent() && action.equalsIgnoreCase("save")) {
             if (!game.get().hasGenre(genre.get())) {
                 game.get().getGenres().add(genre.get());
             }
-            gameRepository.save(game.get());
+            videoGamesService.save(game.get());
             model.addAttribute("game", genreRepository.findById(id));
             model.addAttribute("genre", genreRepository.findAll());
-            return "redirect:/games";
+            return "redirect:/videoGames";
         }
 
-        model.addAttribute("VideoGames", gameRepository.findAll());
-        return "redirect:/games";
+        model.addAttribute("VideoGames", videoGamesService.findAll());
+        return "redirect:/videoGames";
 
+    }
+
+    @RequestMapping(value = "/genres/games",method = RequestMethod.GET)
+    public String findGamesWithGenre(@RequestParam Long genreId, Model model){
+        model.addAttribute("games",videoGamesService.findAllGamesWithGenre(genreId));
+        return "gamesWithGenre";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/games")
+    public @ResponseBody List<VideoGame> getGames() { //REST
+        return videoGamesService.findAll();
     }
 
 }

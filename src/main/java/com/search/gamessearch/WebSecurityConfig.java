@@ -1,7 +1,8 @@
-package com.search.gamessearch.config;
+package com.search.gamessearch;
 
 import com.search.gamessearch.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //Spring Security
 @Configuration
 @EnableWebSecurity
+@ComponentScan("com.search.gamessearch")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;

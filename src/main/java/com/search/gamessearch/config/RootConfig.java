@@ -1,6 +1,5 @@
 package com.search.gamessearch.config;
 
-import org.hibernate.annotations.Filter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;

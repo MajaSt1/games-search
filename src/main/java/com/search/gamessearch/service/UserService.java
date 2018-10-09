@@ -19,6 +19,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
+    // interfejs funkcyjny
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         User userCheck= userRepository.findByUsername(username);
 
