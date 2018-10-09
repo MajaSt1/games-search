@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Developer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Add genre</h1>
+    <form th:action="@{/games/{id}/genres(id=${games.id})}" method="get" enctype="multipart/form-data" >
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Video Game info</div>
+                <div class="panel-body" style="padding-left: 5px;">
+                    Name: <b th:text="${game.name}" ></b>
+                    Description: <span th:text="${game.description}" ></span><br/>
+                    <br/>Genres:
+                    <span th:each="genre : ${videoGame.genres}">
+					<br/>&nbsp;&nbsp;<span th:text="${genre.name}" ></span>
+				</span>
+                    <br/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <select class="form-control" name="courseId">
+                    <option th:each="genres : ${genre}"
+                            th:value="${genres.id}"
+                            th:text="${genres.name}">Genre </option>
+                </select>
+            </div>
+            <input type="submit" name="action" class="btn btn-primary" value="Save"></input>
+            <input type="submit" name="action" class="btn btn-default" value="Cancel"></input>
+        </div>
+    </form>
+</div>
+</body>
+</html>
