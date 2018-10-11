@@ -1,6 +1,6 @@
 package com.search.gamessearch.controller;
 
-import com.search.gamessearch.model.SignupForm;
+import com.search.gamessearch.model.Register;
 import com.search.gamessearch.model.User;
 import com.search.gamessearch.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,25 +19,31 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping(value = "signup")
-    public String addGame(Model model){
-        model.addAttribute("signupform", new SignupForm());
+    public String registration(Model model){
+        model.addAttribute("signupform", new Register());
         return "signup";
     }
 
-    @RequestMapping(value = "saveuser", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
+    @RequestMapping(value = "submituser", method = RequestMethod.POST)
+    public String submit(@Valid @ModelAttribute("signupform") Register register, BindingResult bindingResult) {
         System.out.println(bindingResult.toString());
         if (!bindingResult.hasErrors()) {
-            if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) {
-                String password = signupForm.getPassword();
+            if (register.getPassword().equals(register.getPasswordCheck())) {
+                String password = register.getPassword();
                 BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
                 String hashPwd = bc.encode(password);
 
                 User newUser = new User();
                 newUser.setPassword(hashPwd);
-                newUser.setUsername(signupForm.getUsername());
-                if (repository.findByUsername(signupForm.getUsername()) == null) {
+                newUser.setUsername(register.getUsername());
+
+                if (repository.findByUsername(register.getUsername()) == null) { //check db
                     repository.save(newUser);
                 }
                 else {
@@ -51,7 +57,7 @@ public class UserController {
             }
         }
         else {
-            return "signup";
+            return "signup"; //binding errors
         }
         return "redirect:/login";
     }

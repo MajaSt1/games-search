@@ -9,12 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-/**
- * MODEL- informacja zwrotna (model i logiczna nazwa widoku)
- * */
+
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -25,12 +22,6 @@ public class VideoGameController {
     GenreRepository genreRepository;
     @Autowired
     VideoGamesService videoGamesService;
-/** MVC
- * */
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
-    }
 
     @RequestMapping("/games")
     public String index(Model model) {
@@ -62,33 +53,14 @@ public class VideoGameController {
         return "redirect:/videoGames";
     }
 
-    @RequestMapping(value = "addGameGenre/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "addGenre/{id}", method = RequestMethod.GET)
     public String addGenre(@PathVariable("id") Long videoGameId, Model model){
 
         model.addAttribute("genre", genreRepository.findAll());
         model.addAttribute("game", videoGamesService.findOne(videoGameId).get());
-        return "addGameGenre";
+        return "addGenre";
     }
 
-    @RequestMapping(value="/games/{id}/genres", method=RequestMethod.GET)
-    public String gamesAddGenre(@RequestParam(value="action", required=true) String action, @PathVariable Long id, @RequestParam Long genreId, Model model) {
-        Optional<Genre> genre = genreRepository.findById(genreId);
-        Optional<VideoGame> game = videoGamesService.findOne(id);
-
-        if (game.isPresent() && action.equalsIgnoreCase("save")) {
-            if (!game.get().hasGenre(genre.get())) {
-                game.get().getGenres().add(genre.get());
-            }
-            videoGamesService.save(game.get());
-            model.addAttribute("game", genreRepository.findById(id));
-            model.addAttribute("genre", genreRepository.findAll());
-            return "redirect:/videoGames";
-        }
-
-        model.addAttribute("VideoGames", videoGamesService.findAll());
-        return "redirect:/videoGames";
-
-    }
     @RequestMapping(value = "/genres/games",method = RequestMethod.GET)
     public String findGamesWithGenre(@RequestParam String genre, Model model){
         model.addAttribute("games",videoGamesService.findAllGamesWithGenre(genre));

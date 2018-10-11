@@ -8,7 +8,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 /**
  * Implement client for use
  * front controller servlet - servlet dyspozytora (MVC)
- * przekierowywanie żadania do pozostałych komponentów
  */
 @SpringBootApplication
 public class GamesSearchApplication extends SpringBootServletInitializer//implements CommandLineRunner
