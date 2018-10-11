@@ -11,7 +11,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * przekierowywanie żadania do pozostałych komponentów
  */
 @SpringBootApplication
-public class GamesSearchApplication //extends SpringBootServletInitializer//implements CommandLineRunner
+public class GamesSearchApplication extends SpringBootServletInitializer//implements CommandLineRunner
 {
 
     public static void main(String[] args) {
@@ -22,9 +22,9 @@ public class GamesSearchApplication //extends SpringBootServletInitializer//impl
     public void run(String... arg0) throws Exception {
     } */
 
- //   @Override
-  //  protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
-   //     return application.sources(GamesSearchApplication.class);
-   // }
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
+        return application.sources(GamesSearchApplication.class);
+   }
 }
 

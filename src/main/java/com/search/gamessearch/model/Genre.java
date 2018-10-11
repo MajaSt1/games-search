@@ -28,7 +28,7 @@ public class Genre {
     @Size(min = 1, message = "name must not be empty")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "genres")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "genres",fetch = FetchType.EAGER)
     private List<VideoGame> games=new ArrayList<>();
 
     public void addGames(VideoGame item){ games.add(item);}
@@ -50,6 +50,14 @@ public class Genre {
     public int hashCode() {
 
         return Objects.hash(getId(), getName(), getGames());
+    }
+
+    @Override
+    public String toString() {
+        return "Genre " + "[ id=" + id +
+                ", name='" + name + '\'' +
+                ", games=" + games +
+                 ']';
     }
 }
 

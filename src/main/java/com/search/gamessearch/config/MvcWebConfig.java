@@ -8,14 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 @ComponentScan("com.search.gamessearch.controller")
-public class MvcWebConfig implements WebMvcConfigurer {
+public class MvcWebConfig extends WebMvcConfigurerAdapter {
    @Autowired
     private ApplicationContext applicationContext;
 

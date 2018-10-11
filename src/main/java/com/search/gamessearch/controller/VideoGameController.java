@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 /**
@@ -88,10 +89,9 @@ public class VideoGameController {
         return "redirect:/videoGames";
 
     }
-
     @RequestMapping(value = "/genres/games",method = RequestMethod.GET)
-    public String findGamesWithGenre(@RequestParam Long genreId, Model model){
-        model.addAttribute("games",videoGamesService.findAllGamesWithGenre(genreId));
+    public String findGamesWithGenre(@RequestParam String genre, Model model){
+        model.addAttribute("games",videoGamesService.findAllGamesWithGenre(genre));
         return "gamesWithGenre";
     }
 

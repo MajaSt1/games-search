@@ -37,6 +37,7 @@ public class VideoGame {
     @Size(min = 1, max = 500)
     private String description;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "game_genre",
             joinColumns = {@JoinColumn(name = "game_id", referencedColumnName = "game_id")},
@@ -71,4 +72,6 @@ public class VideoGame {
         return Objects.hash(getId(), getName(), getDescription(), getGenres());
 
     }
+
+
 }

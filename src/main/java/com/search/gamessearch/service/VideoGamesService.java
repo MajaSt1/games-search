@@ -7,8 +7,10 @@ import com.search.gamessearch.repository.VideoGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class VideoGamesService {
@@ -30,15 +32,14 @@ public class VideoGamesService {
         return videoGameRepository.findById(videoGame);
     }
 
-    public Map<Genre, List<VideoGame>> findAllGamesWithGenre(Long id){
-        Map<Genre, List<VideoGame>> mgames= new HashMap<>();
-        List<VideoGame> videoGames= videoGameRepository.findAll();
-        videoGames.stream()
-                .filter(v->v.getGenres().equals(genreRepository.findOne(id)))
-                .collect(Collectors.toList());
+    @Transactional //connection open so that the Stream can actually be consumed
+    public String findAllGamesWithGenre(String genre){
+        List<String> videoGames= Collections.emptyList();
 
-        mgames.put(genreRepository.findOne(id),videoGames);
-
-        return mgames;
+        try(Stream<Genre> stream= genreRepository.findByName(genre)){
+            videoGames=stream.map(Genre::toString).collect(Collectors.toList());
+        }
+        System.out.println(videoGames);
+        return videoGames.toString();
     }
 }

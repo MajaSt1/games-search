@@ -4,25 +4,27 @@ import com.search.gamessearch.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
-
-//Spring Security
 @Configuration
+@Component("WebSecurityConfig")
 @EnableWebSecurity
 @ComponentScan("com.search.gamessearch")
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(1)
+public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeRequests()
-                .antMatchers("/css/**","/signup","/saveuser").permitAll() //Enable css when logged out
+                .antMatchers("/css/**","/signup","/saveuser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

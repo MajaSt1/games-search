@@ -3,6 +3,7 @@ package com.search.gamessearch.db;
 import com.search.gamessearch.model.Genre;
 import com.search.gamessearch.model.VideoGame;
 import com.search.gamessearch.repository.VideoGameRepository;
+import com.search.gamessearch.service.VideoGamesService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertNotEquals;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class VideoGameDbTestSuite {
-  /*  @Autowired
+    @Autowired
     VideoGameRepository gamesRepository;
+    @Autowired
+    VideoGamesService videoGamesService;
 
     @Test
     public void testSaveManyToMany(){
@@ -62,5 +65,9 @@ public class VideoGameDbTestSuite {
         assertNotEquals(0,cup_Id);
         assertNotEquals(0,divinity_Id);
 
-    }*/
+       videoGamesService.findAllGamesWithGenre("Fantasy");
+
+    }
+
+
 }
