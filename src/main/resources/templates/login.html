@@ -1,4 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head th:include="layout :: head(title=~{::title},links=~{})">
     <title>Please Login</title>
 </head>
@@ -7,7 +9,6 @@
     <form name="f" th:action="@{/login}" method="post">
         <fieldset>
             <legend>Please Login</legend>
-            <!--/*@thymesVar id="param" type=""*/-->
             <div th:if="${param.error}" class="alert alert-error">
                 Invalid username and password.
             </div>

@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login")
     public String login() {
         return "login";
     }

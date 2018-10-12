@@ -1,17 +1,17 @@
 package com.search.gamessearch.controller;
 
-import com.search.gamessearch.model.Genre;
 import com.search.gamessearch.model.VideoGame;
 import com.search.gamessearch.repository.GenreRepository;
 import com.search.gamessearch.service.VideoGamesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
-
+import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -22,43 +22,39 @@ public class VideoGameController {
     GenreRepository genreRepository;
     @Autowired
     VideoGamesService videoGamesService;
-
-    @RequestMapping("/games")
-    public String index(Model model) {
+    // Show all games
+    @RequestMapping(value = "/showgames", method = RequestMethod.GET)
+    public String showVGamesList (Map<String, Object> model) {
         List<VideoGame> vgames = videoGamesService.findAll();
-        model.addAttribute("videoGames", vgames);
+        model.put("videoGames", vgames);
         return "videoGames";
     }
+
     @RequestMapping(value = "/newGame")
     public String addGame(Model model){
-        model.addAttribute("addVideoGame", new VideoGame());
+        model.addAttribute("videoGame", new VideoGame());
         return "addGame";
     }
 
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(@Valid @ModelAttribute("videoGame") VideoGame videoGame, BindingResult result) {
+        if (result.hasErrors()) {
+            return "addGame";
+        } else {
+            videoGamesService.addGame(videoGame);
+            return "redirect:/videoGames";
+        }
+    }
     @RequestMapping(value = "/edit/{id}")
     public String editGame(@PathVariable("id") Long videoGameId, Model model){
         model.addAttribute("game", videoGamesService.findOne(videoGameId));
         return "editGame";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(VideoGame videoGame){
-        videoGamesService.save(videoGame);
-        return "redirect:/videoGames";
-    }
-
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteGame(@PathVariable("id") Long videoGameId) {
         videoGamesService.delete(videoGameId);
         return "redirect:/videoGames";
-    }
-
-    @RequestMapping(value = "addGenre/{id}", method = RequestMethod.GET)
-    public String addGenre(@PathVariable("id") Long videoGameId, Model model){
-
-        model.addAttribute("genre", genreRepository.findAll());
-        model.addAttribute("game", videoGamesService.findOne(videoGameId).get());
-        return "addGenre";
     }
 
     @RequestMapping(value = "/genres/games",method = RequestMethod.GET)

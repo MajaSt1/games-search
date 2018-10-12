@@ -22,7 +22,7 @@ public class VideoGamesService {
     public List<VideoGame> findAll(){
         return videoGameRepository.findAll();
     }
-    public VideoGame save(final VideoGame videoGame){
+    public VideoGame addGame(final VideoGame videoGame){
         return videoGameRepository.save(videoGame);
     }
     public void delete(long gameId){

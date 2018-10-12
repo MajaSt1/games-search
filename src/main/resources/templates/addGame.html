@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add VideoGame</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>New VideoGame</h1>
+    <div class="col-md-4">
+        <!--/*@thymesVar id="addVideoGame" type="com.search.gamessearch.controller"*/-->
+        <form th:object="${videoGames}" th:action="@{save}" action="#" method="post">
+            <input type="text" th:field="*{name}" class="form-control"
+                   placeholder="name" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+            <input type="text" th:field="*{description}" class="form-control"
+                   placeholder="description" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+            <input type="submit" class="btn btn-primary" value="Save"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>
