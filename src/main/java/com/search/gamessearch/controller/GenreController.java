@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
 @Controller
-@RequestMapping("/videoGame")
 public class GenreController {
 
     @Autowired

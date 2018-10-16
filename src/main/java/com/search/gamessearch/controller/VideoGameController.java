@@ -13,16 +13,16 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "*")
+
 @Controller
-@RequestMapping("/videoGame")
 public class VideoGameController {
 
     @Autowired
     GenreRepository genreRepository;
     @Autowired
     VideoGamesService videoGamesService;
-    // Show all games
+
+    //   Show all games
     @RequestMapping(value = "/showgames", method = RequestMethod.GET)
     public String showVGamesList (Map<String, Object> model) {
         List<VideoGame> vgames = videoGamesService.findAll();

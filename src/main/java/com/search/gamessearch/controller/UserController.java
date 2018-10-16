@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -19,18 +20,17 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
-    @RequestMapping(value = "/login")
-    public String login() {
-        return "login";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login() {
+        return new ModelAndView("login");
     }
-
-    @RequestMapping(value = "signup")
+    @RequestMapping(value = "/signup")
     public String registration(Model model){
         model.addAttribute("signupform", new Register());
         return "signup";
     }
 
-    @RequestMapping(value = "submituser", method = RequestMethod.POST)
+    @RequestMapping(value = "/submituser", method = RequestMethod.POST)
     public String submit(@Valid @ModelAttribute("signupform") Register register, BindingResult bindingResult) {
         System.out.println(bindingResult.toString());
         if (!bindingResult.hasErrors()) {

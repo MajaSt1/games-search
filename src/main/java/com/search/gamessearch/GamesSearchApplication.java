@@ -12,6 +12,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 @SpringBootApplication
 public class GamesSearchApplication extends SpringBootServletInitializer//implements CommandLineRunner
 {
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
+        return application.sources(GamesSearchApplication.class); }
 
     public static void main(String[] args) {
         SpringApplication.run(GamesSearchApplication.class, args);
@@ -20,10 +23,5 @@ public class GamesSearchApplication extends SpringBootServletInitializer//implem
     @Override
     public void run(String... arg0) throws Exception {
     } */
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
-        return application.sources(GamesSearchApplication.class);
-   }
 }
 
