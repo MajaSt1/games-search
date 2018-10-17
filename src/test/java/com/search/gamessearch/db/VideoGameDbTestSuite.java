@@ -1,14 +1,25 @@
 package com.search.gamessearch.db;
 
+import com.search.gamessearch.controller.UserController;
 import com.search.gamessearch.model.Genre;
+import com.search.gamessearch.model.Register;
 import com.search.gamessearch.model.VideoGame;
 import com.search.gamessearch.repository.VideoGameRepository;
 import com.search.gamessearch.service.VideoGamesService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+
+import java.beans.PropertyEditor;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertNotEquals;
 
@@ -19,6 +30,8 @@ public class VideoGameDbTestSuite {
     VideoGameRepository gamesRepository;
     @Autowired
     VideoGamesService videoGamesService;
+    @Autowired
+    UserController userController;
 
     @Test
     public void testSaveManyToMany(){
@@ -66,8 +79,5 @@ public class VideoGameDbTestSuite {
         assertNotEquals(0,divinity_Id);
 
        videoGamesService.findAllGamesWithGenre("Fantasy");
-
     }
-
-
 }

@@ -1,16 +1,17 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add user</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" th:href="@{classpath:/static/css/style.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/static/css/style.css}" />
 </head>
 <body>
 <h1>Sign-up</h1>
-<input class="col-md-4">
-    <input th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
+<div class="col-md-4">
+    <!--/*@thymesVar id="signupform" type="com.search.gamessearch.controller.UserController"*/-->
+    <form th:action="@{/submituser}"  th:object="${signupform}" action="#" method="post">
         <input type="text" th:field="*{username}" class="form-control"
-               placeholder="Username" > </input>
+               placeholder="Username" />
         <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>
         <div style="clear: both; display: block; height: 10px;"></div>
         <input type="password" th:field="*{password}" class="form-control"
@@ -22,8 +23,8 @@
         <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>
 
     <div style="clear: both; display: block; height: 10px;"></div>
-    <input type="submit" class="btn btn-primary" value="Save">save</input>
-    </form>
-</div>
+    <input type="submit" class="btn btn-primary" value="Save"/>
+       </form>
+    </div>
 </body>
 </html>

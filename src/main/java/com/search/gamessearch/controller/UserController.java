@@ -21,16 +21,17 @@ public class UserController {
     private UserRepository repository;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
-        return new ModelAndView("login");
+    public String login() {
+        return"login";
     }
-    @RequestMapping(value = "/signup")
+
+    @RequestMapping(value = "signup")
     public String registration(Model model){
         model.addAttribute("signupform", new Register());
         return "signup";
     }
 
-    @RequestMapping(value = "/submituser", method = RequestMethod.POST)
+    @RequestMapping(value = "submituser", method = RequestMethod.POST)
     public String submit(@Valid @ModelAttribute("signupform") Register register, BindingResult bindingResult) {
         System.out.println(bindingResult.toString());
         if (!bindingResult.hasErrors()) {
@@ -45,6 +46,7 @@ public class UserController {
 
                 if (repository.findByUsername(register.getUsername()) == null) { //check db
                     repository.save(newUser);
+
                 }
                 else {
                     bindingResult.rejectValue("username", "error.userexists", "Username already exists");
@@ -59,6 +61,6 @@ public class UserController {
         else {
             return "signup"; //binding errors
         }
-        return "redirect:/login";
+        return "login";
     }
 }
