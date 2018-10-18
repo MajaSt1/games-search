@@ -61,6 +61,6 @@ public class UserController {
         else {
             return "signup"; //binding errors
         }
-        return "login";
+        return "redirect:/login";
     }
 }

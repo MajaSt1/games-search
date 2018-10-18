@@ -24,16 +24,14 @@
         <table class="table table-striped">
             <tr>
                 <th>Name</th>
-                <th>Department</th>
-                <th>Courses</th>
                 <th>Actions</th>
             </tr>
-            <tr th:each = "game : ${game}">
+            <tr th:each = "game : ${videoGames}">
                 <td th:text="${game.name}"></td>
                 <td th:text="${game.description}"></td>
                 <td>
-				<span th:each="course,iterStat : ${game.genre}">
-					<span th:text="${genre.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				<span th:each="genre,iterStat : ${videoGames.genres}">
+					<span th:text="${genres.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
 				</span>
                 </td>
                 <td>

@@ -23,7 +23,7 @@ public class VideoGameController {
     VideoGamesService videoGamesService;
 
     //   Show all games
-    @RequestMapping(value = "/showgames", method = RequestMethod.GET)
+    @RequestMapping(value = "/videoGames", method = RequestMethod.GET)
     public String showVGamesList (Map<String, Object> model) {
         List<VideoGame> vgames = videoGamesService.findAll();
         model.put("videoGames", vgames);
