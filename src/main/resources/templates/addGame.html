@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -10,7 +11,7 @@
     <h1>New VideoGame</h1>
     <div class="col-md-4">
         <!--/*@thymesVar id="addVideoGame" type="com.search.gamessearch.controller"*/-->
-        <form th:object="${videoGames}" th:action="@{save}" action="#" method="post">
+        <form th:object="${videoGame}" th:action="@{/save}" action="#" method="post">
             <input type="text" th:field="*{name}" class="form-control"
                    placeholder="name" />
             <div style="clear: both; display: block; height: 10px;"></div>

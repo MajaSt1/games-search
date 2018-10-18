@@ -3,7 +3,7 @@
 <head>
     <title>VideoGames Searcher</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" th:href="@{/static/css/style.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/style.css}" />
 
 </head>
 <body>
@@ -23,25 +23,26 @@
     <div style="padding:0 20px">
         <table class="table table-striped">
             <tr>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>name</th>
+                <th>description</th>
+                <th>genres</th>
             </tr>
             <tr th:each = "game : ${videoGames}">
                 <td th:text="${game.name}"></td>
                 <td th:text="${game.description}"></td>
                 <td>
-				<span th:each="genre,iterStat : ${videoGames.genres}">
-					<span th:text="${genres.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				<span th:each="genre,iterStat : ${game.genres}">
+					<span th:text="${genre.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
 				</span>
                 </td>
                 <td>
-                    <a th:href="@{addGenre/{id}(id=${game.id})}" class="btn btn-primary btn-xs">Add Genre</a>
+                    <a th:href="@{/newGame}" class="btn btn-primary btn-xs">Add Genre</a>
                     <a th:href="@{/edit/{id}(id=${game.id})}" class="btn btn-primary btn-xs">Edit</a>
                     <a th:href="@{/delete/{id}(id=${game.id})}" class="btn btn-danger btn-xs">Delete</a>
                 </td>
             </tr>
         </table>
-        <a href="/add" class="btn btn-primary">Add VideoGame</a>
+        <a href="/newGame" class="btn btn-primary">Add VideoGame</a>
     </div>
 </div>
 </body>

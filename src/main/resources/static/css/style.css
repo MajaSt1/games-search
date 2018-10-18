@@ -1,34 +1,32 @@
 body {
-    font-family: "Arial";
-    font-color: #2e2e2e;
-}
-
+    padding-left: 20em;
+    font-family: Impact, Charcoal, sans-serif,
+    Times, serif;
+    color: lightyellow;
+    background-image: url(https://assets.rpgsite.net/images/images/000/048/921/original/WoWScrnShot_091616_122203.jpg); }
+ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
 h1 {
-    text-align: center;
+    font-family: Impact, Charcoal, sans-serif
 }
-
-button {
-    background-color: #8092ff;
-    padding: 10px 20px;
-    border-radius: 3px;
-    border: none;
-}
-
-form {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-div {
-    margin: auto;
-    width: auto;
-    max-width: 800px;
-    margin-bottom: 30px;
-}
-
-input, textarea {
-    font-size: 13px;
-    padding: 5px;
-    width: 100%;
-}
+ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid black }
+ul.navbar a {
+    text-decoration: none }
+a:link {
+    color: yellow }
+a:visited {
+    color: mediumpurple }
+address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
