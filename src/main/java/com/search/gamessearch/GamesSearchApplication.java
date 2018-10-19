@@ -35,7 +35,7 @@ public class GamesSearchApplication extends SpringBootServletInitializer
             Genre indie = new Genre("Indie Games");
 
             VideoGame kcd = new VideoGame("Kingdom Come: Deliverance", "It is an action RPG, epic in scale, set in the Medieval period, specifically during the Hussite Wars ");
-            VideoGame wow = new VideoGame("World of Warcraft: Battle of Azeroth", "The seventh expansion for World of Warcraft, focusing on the rivalry between the two most important " +
+            VideoGame wow = new VideoGame("World of Warcraft: Battle for Azeroth", "The seventh expansion for World of Warcraft, focusing on the rivalry between the two most important " +
                     "factions of Azeroth, the Alliance and the Horde.");
             VideoGame cup = new VideoGame("Cuphead", "Cuphead is a classic run and gun action game heavily focused on boss battles.");
             VideoGame divinity = new VideoGame("Divinity: Original Sin II", "A direct sequel to Divinity: Original Sin and another installment in " +
